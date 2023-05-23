@@ -1,0 +1,28 @@
+version: '3'
+
+networks:
+  ucbnet2:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: "10.21.0.0/16"
+          gateway: "10.21.0.1"
+
+services:
+  hello-1:
+    image: test1-spring:1.0.1
+    networks:
+      - ucbnet2
+
+  hello-2:
+    image: test1-spring:1.0.1
+    networks:
+      - ucbnet2
+
+  nginx:
+    image: nginx:1.21.6
+    ports:
+      - 8888:80
+    networks:
+      - ucbnet2
